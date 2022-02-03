@@ -6,24 +6,8 @@ namespace SokobanServer
     public class MyDbContext : DbContext
     {
         public DbSet<Level> Levels { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Filename=Database.db", options =>
-            {
-                options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
-            });
-            base.OnConfiguring(optionsBuilder);
-        }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            // Map table names
-            modelBuilder.Entity<Level>().ToTable("Levels", "test");
-            modelBuilder.Entity<Level>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.HasIndex(e => e.LevelName).IsUnique();
-            });
-            base.OnModelCreating(modelBuilder);
-        }
+            => optionsBuilder.UseNpgsql("Host=app-fef0c111-3e52-4d9a-9020-97de5b1e737b-do-user-10768448-0.b.db.ondigitalocean.com;Database=db;Username=db;Password=9nw7Tnqn66pHiug0");
     }
 }
