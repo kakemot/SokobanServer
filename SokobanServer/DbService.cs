@@ -22,6 +22,5 @@
             Level level = dbContext.Levels.Where(x => x.Id == id).First();
             return level;
         }
-
     }
 }
