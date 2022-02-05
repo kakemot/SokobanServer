@@ -2,12 +2,13 @@
 {
     public class DbService
     {
-        public async void AddLevel(Level level)
+        public async Task<int> AddLevel(Level level)
         {
             await using var dbContext = new MyDbContext();
             dbContext.Database.EnsureCreated();
-            await dbContext.AddAsync(level);
+            var result = await dbContext.AddAsync(level);
             await dbContext.SaveChangesAsync();
+            return result.Entity.Id;
         }
 
         public async Task<List<Level>> GetLevels()
