@@ -24,11 +24,13 @@ namespace SokobanServer.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<int>> PostNewLevel(Level level)
+        public async Task<ActionResult<Level>> PostNewLevel(Level level)
         {
             DbService db = new DbService();
-            int id = await db.AddLevel(level);
-            return id;
+            int newId = await db.AddLevel(level);
+            Level newLevel = level;
+            newLevel.Id = newId;
+            return newLevel;
         }
     }
 }
