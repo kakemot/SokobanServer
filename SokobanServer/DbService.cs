@@ -26,5 +26,16 @@
             Level level = dbContext.Levels.Where(x => x.Id == id).First();
             return level;
         }
+
+        public async Task<int> Delete()
+        {
+            await using var dbContext = new MyDbContext();
+            dbContext.Database.EnsureCreated();
+            for (int i = 0; i < dbContext.Levels.Count(); i++)
+            {
+                dbContext.Remove(new Level { Id = i});
+            }
+            return 1;
+        }
     }
 }

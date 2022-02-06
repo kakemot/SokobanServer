@@ -32,5 +32,13 @@ namespace SokobanServer.Controllers
             newLevel.Id = newId;
             return newLevel;
         }
+
+        [HttpGet]
+        public async Task<int> Nuke()
+        {
+            DbService db = new DbService();
+            int result = await db.Delete();
+            return result;
+        }
     }
 }
