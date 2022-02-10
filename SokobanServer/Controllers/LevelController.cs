@@ -33,12 +33,12 @@ namespace SokobanServer.Controllers
             return newLevel;
         }
 
-        [HttpGet]
-        public async Task<int> Nuke()
+        [HttpPost]
+        public async Task<ActionResult<Level>> SetLevelAsSolvable(int id)
         {
             DbService db = new DbService();
-            int result = await db.Delete();
-            return result;
+            Level level = await db.SetLevelAsSolvable(id);
+            return level;
         }
     }
 }

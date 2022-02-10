@@ -27,6 +27,15 @@
             return level;
         }
 
+        public async Task<Level> SetLevelAsSolvable(int id)
+        {
+            await using var dbContext = new MyDbContext();
+            dbContext.Database.EnsureCreated();
+            dbContext.Levels.Where(x => x.Id == id).First().Solvable = true;
+            dbContext.SaveChangesAsync();
+            return new Level();
+        }
+
         public async Task<int> Delete()
         {
             await using var dbContext = new MyDbContext();

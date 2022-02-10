@@ -10,5 +10,7 @@ namespace SokobanServer
         public string? LevelName { get; set; }
 
         public string? LevelContent { get; set; }
+
+        public bool Solvable { get; set; }
     }
 }
