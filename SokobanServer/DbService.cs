@@ -32,7 +32,7 @@
             await using var dbContext = new MyDbContext();
             dbContext.Database.EnsureCreated();
             dbContext.Levels.Where(x => x.Id == id).First().Solvable = true;
-            dbContext.SaveChangesAsync();
+            await dbContext.SaveChangesAsync();
             return new Level();
         }
 
