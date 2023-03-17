@@ -7,7 +7,14 @@ namespace SokobanServer
     {
         public DbSet<Level> Levels { get; set; }
 
+        public string DbPath { get; }
+
+        public MyDbContext()
+        {
+            DbPath = System.IO.Path.Join("", "levels.db");
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Port=25060;Host=app-fef0c111-3e52-4d9a-9020-97de5b1e737b-do-user-10768448-0.b.db.ondigitalocean.com;Database=db;Username=db;Password=9nw7Tnqn66pHiug0");
+            => optionsBuilder.UseSqlite($"Data Source={DbPath}");
     }
 }
